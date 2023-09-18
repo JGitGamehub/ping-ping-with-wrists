@@ -1,6 +1,8 @@
 
 /*created by jed */
 
+
+
 var paddle2 =10,paddle1=10;
 
 var paddle1X = 10,paddle1Height = 110;
@@ -21,6 +23,10 @@ var ball = {
     dy:3
 }
 
+rightWristX = "";
+rightWristY = "";
+rightWristScore = 0;
+
 function setup(){
    video = createCapture(VIDEO);
    video.hide();
@@ -37,8 +43,24 @@ function modelLoaded() {
   console.log("model is loaded");
 }
 
+function gotPoses(results)
+{
+if(results.length > 0)
+{
+  console.log(results);	
+  rightWristX  = results[0].pose.wrist.x;
+  rightWristY = results[0].pose.wrist.y;
+}
+}
+
 
 function draw(){
+if (rightWristScore > 0.2) {
+  fill("red");
+  stroke("red");
+  circle(rightWristX, rightWristY, 20);
+}
+
 
  background(0); 
 
